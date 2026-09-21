@@ -122,14 +122,23 @@ h1 { max-width:560px; margin:0; font-size:clamp(2.1rem, 9vw, 4rem); line-height:
   z-index:5;
   left:50%;
   bottom:-2vh;
-  width:min(780px, 100vw);
-  height:69vh;
+  width:min(820px, 108vw);
+  height:71vh;
   transform:translateX(-50%);
   pointer-events:none;
 }
-.ground-glow { position:absolute; left:11%; right:11%; bottom:-4%; height:22%; background:radial-gradient(ellipse, rgba(76,113,55,.31), transparent 67%); filter:blur(13px); }
+.ground-glow {
+  position:absolute;
+  left:14%;
+  right:14%;
+  bottom:6%;
+  height:20%;
+  background:radial-gradient(ellipse, rgba(86,132,61,.34), transparent 69%);
+  filter:blur(16px);
+}
 
 .sunflower {
+  --x:0px;
   --h:50vh;
   --lean:0deg;
   --scale:1;
@@ -138,11 +147,11 @@ h1 { max-width:560px; margin:0; font-size:clamp(2.1rem, 9vw, 4rem); line-height:
   --leaf-b:68%;
   position:absolute;
   left:50%;
-  bottom:0;
+  bottom:11vh;
   width:112px;
   height:var(--h);
   transform-origin:50% 100%;
-  transform:translateX(-50%) rotate(var(--lean)) scale(var(--scale));
+  transform:translateX(calc(-50% + var(--x))) rotate(var(--lean)) scale(var(--scale));
   pointer-events:none;
 }
 .hero-flower { pointer-events:auto; cursor:pointer; z-index:12; }
@@ -152,7 +161,7 @@ h1 { max-width:560px; margin:0; font-size:clamp(2.1rem, 9vw, 4rem); line-height:
   left:50%;
   bottom:0;
   width:7px;
-  height:calc(100% - 78px);
+  height:calc(100% - 86px);
   transform:translateX(-50%) scaleY(0);
   transform-origin:50% 100%;
   border-radius:999px 999px 4px 4px;
@@ -198,8 +207,8 @@ h1 { max-width:560px; margin:0; font-size:clamp(2.1rem, 9vw, 4rem); line-height:
   z-index:3;
   left:50%;
   top:0;
-  width:106px;
-  height:106px;
+  width:118px;
+  height:118px;
   transform:translateX(-50%) scale(0) rotate(-2deg);
   transform-origin:50% 52%;
   filter:drop-shadow(0 10px 18px rgba(240,184,36,.16));
@@ -225,10 +234,10 @@ h1 { max-width:560px; margin:0; font-size:clamp(2.1rem, 9vw, 4rem); line-height:
   position:absolute;
   left:50%;
   top:50%;
-  width:17px;
-  height:42px;
-  margin-left:-8.5px;
-  margin-top:-42px;
+  width:16px;
+  height:40px;
+  margin-left:-8px;
+  margin-top:-40px;
   transform-origin:50% 100%;
   transform:rotate(var(--angle));
   border-radius:58% 58% 42% 42% / 68% 68% 32% 32%;
@@ -239,10 +248,10 @@ h1 { max-width:560px; margin:0; font-size:clamp(2.1rem, 9vw, 4rem); line-height:
 }
 .petal-ring.inner { transform:scale(.76) rotate(11.25deg); }
 .petal-ring.inner .ray {
-  width:16px;
-  height:38px;
-  margin-left:-8px;
-  margin-top:-38px;
+  width:14px;
+  height:32px;
+  margin-left:-7px;
+  margin-top:-32px;
   background:linear-gradient(180deg, #ffea72, #f6c52f 65%, #dc9814);
 }
 .flower-d .ray:nth-child(3n), .flower-b .ray:nth-child(4n), .flower-f .ray:nth-child(5n) { filter:brightness(.94); }
@@ -274,6 +283,14 @@ h1 { max-width:560px; margin:0; font-size:clamp(2.1rem, 9vw, 4rem); line-height:
   mix-blend-mode:screen;
 }
 .hero-flower .flower-head { filter:drop-shadow(0 9px 23px rgba(255,215,74,.27)); }
+.flower-a{z-index:2}
+.flower-b{z-index:3}
+.flower-c{z-index:4}
+.flower-d{z-index:7}
+.flower-e{z-index:4}
+.flower-f{z-index:3}
+.flower-g{z-index:2}
+
 .hero-flower::after {
   content:"";
   position:absolute;
@@ -290,11 +307,55 @@ h1 { max-width:560px; margin:0; font-size:clamp(2.1rem, 9vw, 4rem); line-height:
 }
 @keyframes secretPulse { 25% { opacity:.7; box-shadow:0 0 0 22px rgba(255,222,86,0); } 100% { opacity:0; } }
 
+.bouquet-wrap {
+  position:absolute;
+  left:50%;
+  bottom:3.8vh;
+  width:360px;
+  height:220px;
+  transform:translateX(-50%);
+  z-index:18;
+  opacity:0;
+}
+.bouquet-wrap .paper {
+  position:absolute;
+  bottom:0;
+  display:block;
+  border-radius:24px 24px 14px 14px;
+  background:linear-gradient(180deg, rgba(250,240,211,.94), rgba(227,208,168,.92));
+  box-shadow:0 20px 34px rgba(0,0,0,.14), inset 0 0 0 1px rgba(255,255,255,.35);
+}
+.bouquet-wrap .left {
+  left:16px;
+  width:170px;
+  height:176px;
+  transform-origin:right bottom;
+  transform:rotate(-16deg) scale(.9);
+}
+.bouquet-wrap .center {
+  left:50%;
+  width:186px;
+  height:194px;
+  transform:translateX(-50%) scale(.92);
+  border-radius:20px 20px 12px 12px;
+  background:linear-gradient(180deg, rgba(245,229,196,.95), rgba(215,193,155,.95));
+}
+.bouquet-wrap .right {
+  right:16px;
+  width:170px;
+  height:176px;
+  transform-origin:left bottom;
+  transform:rotate(16deg) scale(.9);
+}
+.story.growing .bouquet-wrap { animation:wrapIn .7s ease 1.8s forwards; }
+.story.returned .bouquet-wrap { opacity:1; }
+@keyframes wrapIn { from { opacity:0; transform:translateX(-50%) translateY(20px) scale(.92);} to { opacity:1; transform:translateX(-50%) translateY(0) scale(1);} }
+
 .bouquet-tie {
   position:absolute;
   z-index:20;
   left:50%;
-  bottom:7vh;
+  bottom:10.3vh;
   width:28px;
   height:20px;
   transform:translateX(-50%);
@@ -329,8 +390,8 @@ h1 { max-width:560px; margin:0; font-size:clamp(2.1rem, 9vw, 4rem); line-height:
   position:absolute;
   z-index:35;
   left:50%;
-  bottom:max(22px, env(safe-area-inset-bottom));
-  width:min(91vw, 580px);
+  bottom:max(46px, calc(env(safe-area-inset-bottom) + 28px));
+  width:min(90vw, 560px);
   transform:translate(-50%, 28px);
   opacity:0;
   pointer-events:none;
@@ -388,16 +449,20 @@ h1 { max-width:560px; margin:0; font-size:clamp(2.1rem, 9vw, 4rem); line-height:
 
 @media (max-width: 520px) {
   .story-copy { top:12.5vh; }
-  .bouquet { width:118vw; height:66vh; bottom:-1vh; transform:translateX(-50%) scale(.86); transform-origin:center bottom; }
-  .flower-head { width:102px; height:102px; }
-  .final-card { padding:17px 18px 16px; }
+  .bouquet { width:118vw; height:68vh; bottom:-1vh; transform:translateX(-50%) scale(.84); transform-origin:center bottom; }
+  .flower-head { width:104px; height:104px; }
+  .bouquet-wrap { width:320px; height:206px; bottom:4.8vh; }
+  .bouquet-wrap .left, .bouquet-wrap .right { width:150px; height:160px; }
+  .bouquet-wrap .center { width:170px; height:178px; }
+  .final-card { padding:17px 18px 16px; bottom:max(20px, calc(env(safe-area-inset-bottom) + 10px)); }
   .final-card h2 { font-size:1.5rem; }
   .final-card p { font-size:.88rem; margin:7px 0; }
 }
 
 @media (max-height: 710px) {
   .story-copy { top:11vh; }
-  .bouquet { height:64vh; transform:translateX(-50%) scale(.84); transform-origin:center bottom; }
+  .bouquet { height:64vh; transform:translateX(-50%) scale(.80); transform-origin:center bottom; }
+  .bouquet-wrap { bottom:4.3vh; }
   .final-card { padding:14px 17px 13px; }
   .final-card p { font-size:.82rem; margin:5px 0; }
   .final-card h2 { font-size:1.4rem; }
