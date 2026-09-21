@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#090b08" />
+  <meta name="theme-color" content="#080b08" />
   <meta name="color-scheme" content="dark" />
   <meta name="description" content="Un pequeño regalo de flores amarillas para Angie." />
   <title>Para Angie 🌻</title>
@@ -39,52 +39,61 @@
         <p class="story-line" id="storyLine"></p>
       </div>
 
-      <div class="garden" id="garden" aria-hidden="true">
+      <div class="bouquet" id="bouquet" aria-hidden="true">
         <div class="ground-glow"></div>
 
-        <div class="flower f1" style="--x: 10%; --h: 33vh; --delay: .2s; --scale: .82; --tilt: -7deg;">
-          <div class="stem"><i class="leaf leaf-l"></i><i class="leaf leaf-r"></i></div><div class="bloom"><i></i></div>
+        <div class="sunflower flower-a" style="--h: 43vh; --lean: -28deg; --scale: .72; --delay: .05s; --leaf-a: 48%; --leaf-b: 68%;">
+          <div class="stem"><i class="stem-leaf left"></i><i class="stem-leaf right"></i></div>
+          <div class="flower-head"></div>
         </div>
-        <div class="flower f2" style="--x: 24%; --h: 42vh; --delay: .75s; --scale: .94; --tilt: 4deg;">
-          <div class="stem"><i class="leaf leaf-l"></i><i class="leaf leaf-r"></i></div><div class="bloom"><i></i></div>
+        <div class="sunflower flower-b" style="--h: 50vh; --lean: -18deg; --scale: .86; --delay: .24s; --leaf-a: 43%; --leaf-b: 67%;">
+          <div class="stem"><i class="stem-leaf left"></i><i class="stem-leaf right"></i></div>
+          <div class="flower-head"></div>
         </div>
-        <div class="flower f3" style="--x: 39%; --h: 37vh; --delay: 1.25s; --scale: .88; --tilt: -3deg;">
-          <div class="stem"><i class="leaf leaf-l"></i><i class="leaf leaf-r"></i></div><div class="bloom"><i></i></div>
+        <div class="sunflower flower-c" style="--h: 55vh; --lean: -9deg; --scale: .94; --delay: .43s; --leaf-a: 51%; --leaf-b: 72%;">
+          <div class="stem"><i class="stem-leaf left"></i><i class="stem-leaf right"></i></div>
+          <div class="flower-head"></div>
         </div>
-        <div class="flower f4 hero-flower" id="secretFlower" style="--x: 52%; --h: 50vh; --delay: 1.65s; --scale: 1.08; --tilt: 1deg;" role="button" tabindex="0" aria-label="Flor central">
-          <div class="stem"><i class="leaf leaf-l"></i><i class="leaf leaf-r"></i></div><div class="bloom"><i></i></div>
+        <div class="sunflower flower-d hero-flower" id="secretFlower" style="--h: 59vh; --lean: 0deg; --scale: 1.06; --delay: .62s; --leaf-a: 46%; --leaf-b: 69%;" role="button" tabindex="0" aria-label="Flor central">
+          <div class="stem"><i class="stem-leaf left"></i><i class="stem-leaf right"></i></div>
+          <div class="flower-head"></div>
         </div>
-        <div class="flower f5" style="--x: 66%; --h: 40vh; --delay: 2.05s; --scale: .91; --tilt: 5deg;">
-          <div class="stem"><i class="leaf leaf-l"></i><i class="leaf leaf-r"></i></div><div class="bloom"><i></i></div>
+        <div class="sunflower flower-e" style="--h: 54vh; --lean: 10deg; --scale: .92; --delay: .81s; --leaf-a: 50%; --leaf-b: 73%;">
+          <div class="stem"><i class="stem-leaf left"></i><i class="stem-leaf right"></i></div>
+          <div class="flower-head"></div>
         </div>
-        <div class="flower f6" style="--x: 79%; --h: 45vh; --delay: 2.45s; --scale: .98; --tilt: -5deg;">
-          <div class="stem"><i class="leaf leaf-l"></i><i class="leaf leaf-r"></i></div><div class="bloom"><i></i></div>
+        <div class="sunflower flower-f" style="--h: 49vh; --lean: 19deg; --scale: .84; --delay: 1s; --leaf-a: 45%; --leaf-b: 66%;">
+          <div class="stem"><i class="stem-leaf left"></i><i class="stem-leaf right"></i></div>
+          <div class="flower-head"></div>
         </div>
-        <div class="flower f7" style="--x: 91%; --h: 32vh; --delay: 2.85s; --scale: .78; --tilt: 7deg;">
-          <div class="stem"><i class="leaf leaf-l"></i><i class="leaf leaf-r"></i></div><div class="bloom"><i></i></div>
+        <div class="sunflower flower-g" style="--h: 42vh; --lean: 29deg; --scale: .70; --delay: 1.19s; --leaf-a: 53%; --leaf-b: 71%;">
+          <div class="stem"><i class="stem-leaf left"></i><i class="stem-leaf right"></i></div>
+          <div class="flower-head"></div>
         </div>
+
+        <div class="bouquet-tie" aria-hidden="true"><i></i><b></b></div>
       </div>
 
-      <div class="petals" id="petals" aria-hidden="true"></div>
+      <div class="falling-petals" id="petals" aria-hidden="true"></div>
 
       <div class="final-card" id="finalCard">
         <p class="final-kicker">Flores amarillas para ti</p>
         <h2>Gracias, Angie. 💛</h2>
-        <p>Gracias por compartir tu tiempo conmigo. El viernes pasado fue bonito; me gustó mucho compartir ese ratito contigo.</p>
-        <p>Ojalá en algún momento podamos volver a coincidir y seguir sumando momentos así.</p>
-        <p class="signature">— Un pequeño recuerdo que no se marchita 🌻</p>
+        <p>Gracias por compartir tu tiempo conmigo.</p>
+        <p>Ojalá podamos seguir coincidiendo y sumando buenos momentos, de esos que simplemente se dan y terminan siendo bonitos.</p>
+        <p class="signature">- Alexis</p>
       </div>
 
       <div class="secret-note" id="secretNote" role="status">
         <button class="secret-close" id="secretClose" type="button" aria-label="Cerrar">×</button>
         <span>🌻</span>
-        <p><strong>P. D.</strong> Gracias otra vez por ese viernes. 💛</p>
+        <p><strong>P. D.</strong> Gracias por hacer bonitos también los momentos más simples. 💛</p>
       </div>
     </section>
 
     <section class="screen return-screen" id="returnScreen" aria-labelledby="return-title">
-      <div class="return-garden" aria-hidden="true">
-        <span>🌻</span><span>🌼</span><span>🌻</span><span>🌼</span><span>🌻</span>
+      <div class="return-flowers" aria-hidden="true">
+        <span class="mini-sunflower"></span><span class="mini-sunflower big"></span><span class="mini-sunflower"></span>
       </div>
       <p class="eyebrow">Para Angie</p>
       <h1 id="return-title">¿Volviste? 🌻</h1>

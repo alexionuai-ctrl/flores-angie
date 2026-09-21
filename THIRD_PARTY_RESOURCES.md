@@ -1,21 +1,15 @@
-# Recursos públicos evaluados
+# Recursos de terceros / referencias técnicas
 
-Esta V1 no incorpora código ni archivos de terceros: las flores son CSS original y el sonido se genera con Web Audio. Esto hace que funcione sin conexión adicional y evita dependencias externas.
+## GMP Sankalpa — Flower-animation
 
-## Candidatos verificados para una V2
+Repositorio: https://github.com/gmpsankalpa/Flower-animation
 
-### kaikrmen/Yellow-Flowers
-- Repositorio: https://github.com/kaikrmen/Yellow-Flowers
-- Uso: referencia para animaciones de flores amarillas en HTML/CSS/JavaScript.
-- Licencia declarada por el repositorio: MIT.
-- Estado en esta V1: **no copiado ni incluido**. Se conserva como referencia para comparar la calidad de la animación.
+Licencia declarada: MIT License, Copyright (c) 2024 GMP Sankalpa.
 
-### code4fukui/sound-cc0
-- Repositorio: https://github.com/code4fukui/sound-cc0
-- Uso: efectos de sonido, incluido `bell1.wav`.
-- Licencia declarada por el repositorio: CC0 1.0 / dominio público; el README indica que no requiere atribución.
-- Estado en esta V1: **no incluido**, porque el chime actual se sintetiza directamente con Web Audio. Es una alternativa si se prefiere un archivo de sonido real.
+La V2 de este regalo adapta la arquitectura general de animación del proyecto: crecimiento separado del tallo, aparición diferida de hojas, floración de la cabezuela y movimiento suave posterior. La geometría de girasol, la composición del ramo, colores, narrativa, JavaScript de memoria y audio están personalizados para este proyecto.
 
-## Criterio
+La licencia MIT del proyecto original exige conservar el aviso de copyright y permiso cuando se reutilicen copias o porciones sustanciales del software. Se incluye el aviso completo en `THIRD_PARTY_LICENSES.md`.
 
-Antes de incorporar cualquier recurso adicional hay que comprobar su licencia en el repositorio original. Que un archivo sea visible públicamente en GitHub no significa por sí solo que pueda reutilizarse.
+## Nota
+
+Que un repositorio sea público no implica automáticamente permiso de reutilización. No se incorporaron repositorios sin una licencia explícita compatible.

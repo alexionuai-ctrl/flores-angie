@@ -1,70 +1,29 @@
-# Flores amarillas para Angie 🌻
+# Flores amarillas para Angie — V2
 
-Mini sitio estático, diseñado primero para celular, con una experiencia de flores amarillas, texto secuencial, sonido generado con Web Audio y una segunda visita que muestra “¿Volviste?”.
+Mini experiencia web móvil para GitHub Pages.
 
-## Qué hace esta versión
+## Cambios de V2
 
-- Primera visita: muestra “Para Angie” y un botón para abrir.
-- Al abrir: crecen flores amarillas, aparecen mensajes secuenciales y un ambiente musical suave.
-- Mensaje final: agradece el tiempo compartido y menciona correctamente **el viernes pasado**.
-- Regreso: `localStorage` recuerda que ese navegador ya abrió el regalo y muestra “¿Volviste? 🌻”.
-- Flor central: funciona como pequeño easter egg y revela un P. D.
-- Privacidad: no hay analytics, cookies, formularios ni envío de datos a un servidor.
-- Recursos visuales y de audio de esta V1: originales/autogenerados; no depende de CDNs, imágenes remotas ni audio de terceros.
+- Girasoles reconstruidos con dos anillos de pétalos independientes y centro texturizado.
+- Ramo en abanico: los tallos nacen desde un punto común en lugar de aparecer aislados por toda la pantalla.
+- Crecimiento secuencial de tallos, hojas y flores.
+- Narrativa menos centrada en un solo día y más en los momentos compartidos.
+- El viernes aparece una sola vez durante la experiencia.
+- El texto final ya no repite el viernes.
+- Firma final: `- Alexis`.
+- Easter egg reformulado para no volver a insistir en el viernes.
+- Conserva memoria local para mostrar `¿Volviste? 🌻` en visitas posteriores.
 
-## Probar localmente
+## Publicar / actualizar en GitHub Pages
 
-La forma más simple:
+Sustituye en la raíz del repositorio los archivos `index.html`, `styles.css` y `app.js` por los de esta versión. Sube también `THIRD_PARTY_RESOURCES.md` y `THIRD_PARTY_LICENSES.md`.
 
-```bash
-python -m http.server 8000
-```
+## Pruebas
 
-Luego abre:
+- Primera visita normal: abre la URL del sitio.
+- Reset de memoria: agrega `?reset=1`.
+- Regalo con identificador: agrega `?g=CODIGO`.
 
-```text
-http://localhost:8000
-```
+Ejemplo:
 
-Para borrar el recuerdo de apertura y volver a probar la primera visita:
-
-```text
-http://localhost:8000/?reset=1
-```
-
-También puedes dar al regalo un identificador único:
-
-```text
-http://localhost:8000/?g=8fa27c
-```
-
-La memoria se guarda bajo ese identificador. En GitHub Pages funcionará igual.
-
-## Publicar en GitHub Pages
-
-1. Crea un repositorio, por ejemplo `flores-angie`.
-2. Sube `index.html`, `styles.css`, `app.js` y `.nojekyll` a la raíz.
-3. Ve a **Settings → Pages**.
-4. En **Build and deployment**, selecciona **Deploy from a branch**.
-5. Usa la rama `main` y la carpeta `/ (root)`.
-6. GitHub publicará una dirección del tipo:
-
-```text
-https://TU-USUARIO.github.io/flores-angie/
-```
-
-Para Angie puedes enviar una URL con identificador aleatorio, por ejemplo:
-
-```text
-https://TU-USUARIO.github.io/flores-angie/?g=8fa27c
-```
-
-Esto no autentica a Angie; sólo separa la memoria de este regalo de cualquier otro regalo que uses con la misma página.
-
-## Limitación de “¿Volviste?”
-
-La página reconoce el mismo almacenamiento del navegador, no la identidad de una persona. Si se abre en otro navegador/dispositivo, en incógnito o se borran los datos del sitio, se verá como una primera visita.
-
-## Próxima iteración sugerida
-
-Comparar esta implementación original con animaciones MIT de flores amarillas y conservar sólo elementos que mejoren la estética sin añadir dependencias frágiles. También se puede sustituir el ambiente Web Audio por una pieza CC0 si se desea una identidad musical concreta.
+`https://usuario.github.io/flores-angie/?g=f7a21`
