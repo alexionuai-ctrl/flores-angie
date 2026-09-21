@@ -2,127 +2,97 @@
   'use strict';
 
   const params = new URLSearchParams(location.search);
-  const giftId = (params.get('g') || 'angie-yellow-flowers-v2').replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 64);
+  const giftId = (params.get('g') || 'angie-yellow-flowers-v3').replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 64);
   const storageKey = `yellowFlowers:${giftId}`;
 
-  const intro = document.getElementById('intro');
-  const story = document.getElementById('story');
-  const returnScreen = document.getElementById('returnScreen');
-  const openGift = document.getElementById('openGift');
-  const openMuted = document.getElementById('openMuted');
-  const returnButton = document.getElementById('returnButton');
-  const soundToggle = document.getElementById('soundToggle');
-  const storyLine = document.getElementById('storyLine');
-  const finalCard = document.getElementById('finalCard');
-  const secretFlower = document.getElementById('secretFlower');
-  const secretNote = document.getElementById('secretNote');
-  const secretClose = document.getElementById('secretClose');
-  const petals = document.getElementById('petals');
+  const $ = id => document.getElementById(id);
+  const intro = $('intro');
+  const story = $('story');
+  const returnScreen = $('returnScreen');
+  const openGift = $('openGift');
+  const openMuted = $('openMuted');
+  const returnButton = $('returnButton');
+  const soundToggle = $('soundToggle');
+  const storyLine = $('storyLine');
+  const secretFlower = $('secretFlower');
+  const secretNote = $('secretNote');
+  const secretBackdrop = $('secretBackdrop');
+  const secretClose = $('secretClose');
+  const petals = $('petals');
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let audio = null;
   let muted = false;
-  let sequenceToken = 0;
+  let token = 0;
 
-  function buildSunflowers() {
-    document.querySelectorAll('.flower-head').forEach((head, flowerIndex) => {
-      if (head.dataset.built === '1') return;
-      head.dataset.built = '1';
-
-      const outer = document.createElement('div');
-      outer.className = 'petal-ring outer';
-      const inner = document.createElement('div');
-      inner.className = 'petal-ring inner';
-
-      const outerCount = 16;
-      const innerCount = 16;
-      for (let i = 0; i < outerCount; i++) {
-        const petal = document.createElement('i');
-        petal.className = 'ray';
-        petal.style.setProperty('--angle', `${i * (360 / outerCount) + (flowerIndex % 2 ? 2.4 : 0)}deg`);
-        outer.appendChild(petal);
-      }
-      for (let i = 0; i < innerCount; i++) {
-        const petal = document.createElement('i');
-        petal.className = 'ray';
-        petal.style.setProperty('--angle', `${i * (360 / innerCount) + 11.25}deg`);
-        inner.appendChild(petal);
-      }
-
-      const disk = document.createElement('span');
-      disk.className = 'sunflower-disk';
-      head.append(outer, inner, disk);
-    });
-  }
-
+  /* ---------- memoria local ---------- */
   function readMemory() {
     try { return JSON.parse(localStorage.getItem(storageKey) || 'null'); }
     catch { return null; }
   }
-
-  function writeMemory(memory) {
-    try { localStorage.setItem(storageKey, JSON.stringify(memory)); }
-    catch { /* Sigue funcionando aunque el navegador bloquee almacenamiento. */ }
+  function writeMemory(m) {
+    try { localStorage.setItem(storageKey, JSON.stringify(m)); } catch { /* sin almacenamiento: sigue funcionando */ }
   }
-
   function rememberVisit() {
     const now = new Date().toISOString();
-    const memory = readMemory();
-    if (!memory) {
-      writeMemory({ firstOpenedAt: now, lastOpenedAt: now, visits: 1 });
-      return;
-    }
-    memory.lastOpenedAt = now;
-    memory.visits = Math.max(1, Number(memory.visits) || 1) + 1;
-    writeMemory(memory);
+    const m = readMemory();
+    if (!m) { writeMemory({ firstOpenedAt: now, lastOpenedAt: now, visits: 1 }); return; }
+    m.lastOpenedAt = now;
+    m.visits = (Number(m.visits) || 1) + 1;
+    writeMemory(m);
   }
 
+  /* ---------- pantallas ---------- */
   function setScreen(active) {
     [intro, story, returnScreen].forEach(el => el.classList.toggle('is-active', el === active));
   }
-
-  function wait(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+  const wait = ms => new Promise(r => setTimeout(r, ms));
 
   async function say(text, hold = 2400) {
-    const token = sequenceToken;
+    const mine = token;
     storyLine.className = 'story-line';
     storyLine.textContent = text;
     void storyLine.offsetWidth;
     storyLine.classList.add('show');
-    await wait(hold);
-    if (token !== sequenceToken) return false;
+    await wait(reduceMotion ? Math.min(hold, 1400) : hold);
+    if (mine !== token) return false;
     storyLine.classList.remove('show');
     storyLine.classList.add('hide');
-    await wait(560);
-    return token === sequenceToken;
+    await wait(reduceMotion ? 60 : 520);
+    return mine === token;
   }
 
-  function createPetals(count = 12) {
+  function createPetals(count = 10) {
     petals.replaceChildren();
+    if (reduceMotion) return;
     for (let i = 0; i < count; i++) {
       const p = document.createElement('i');
       p.className = 'falling-petal';
       p.style.left = `${6 + Math.random() * 88}%`;
-      p.style.setProperty('--dur', `${6 + Math.random() * 4}s`);
-      p.style.setProperty('--drift', `${-48 + Math.random() * 96}px`);
-      p.style.animationDelay = `${Math.random() * 2.6}s`;
-      p.style.scale = `${.6 + Math.random() * .7}`;
+      p.style.setProperty('--dur', `${7 + Math.random() * 5}s`);
+      p.style.setProperty('--drift', `${-40 + Math.random() * 80}px`);
+      p.style.animationDelay = `${Math.random() * 6}s`;
+      p.style.scale = `${0.6 + Math.random() * 0.7}`;
       petals.appendChild(p);
     }
   }
 
+  /* ---------- audio ---------- */
   function ensureAudio() {
     if (audio) return audio;
     const Ctx = window.AudioContext || window.webkitAudioContext;
     if (!Ctx) return null;
-    const ctx = new Ctx();
-    const master = ctx.createGain();
-    master.gain.value = .17;
-    master.connect(ctx.destination);
-    audio = { ctx, master, timers: [] };
-    return audio;
+    try {
+      const ctx = new Ctx();
+      const master = ctx.createGain();
+      master.gain.value = 0.17;
+      master.connect(ctx.destination);
+      audio = { ctx, master, timers: [] };
+      return audio;
+    } catch { return null; }
   }
-
-  function tone(freq, start, duration, gain = .08, type = 'sine') {
+  function tone(freq, start, duration, gain = 0.08, type = 'sine') {
     if (!audio || muted) return;
     const { ctx, master } = audio;
     const osc = ctx.createOscillator();
@@ -130,23 +100,20 @@
     osc.type = type;
     osc.frequency.setValueAtTime(freq, start);
     env.gain.setValueAtTime(0.0001, start);
-    env.gain.exponentialRampToValueAtTime(gain, start + .03);
+    env.gain.exponentialRampToValueAtTime(gain, start + 0.03);
     env.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-    osc.connect(env);
-    env.connect(master);
-    osc.start(start);
-    osc.stop(start + duration + .03);
+    osc.connect(env); env.connect(master);
+    osc.start(start); osc.stop(start + duration + 0.05);
   }
-
   function playChime() {
     if (!audio || muted) return;
-    const t = audio.ctx.currentTime + .02;
-    [659.25, 783.99, 987.77].forEach((f, i) => tone(f, t + i * .10, .9, .055));
-    tone(1318.51, t + .33, 1.15, .03);
+    const t = audio.ctx.currentTime + 0.02;
+    [659.25, 783.99, 987.77].forEach((f, i) => tone(f, t + i * 0.1, 0.9, 0.055));
+    tone(1318.51, t + 0.33, 1.15, 0.03);
   }
-
   function startAmbience() {
     if (!audio || muted) return;
+    stopAmbience();
     const { ctx } = audio;
     const chords = [
       [261.63, 329.63, 392.00],
@@ -157,42 +124,52 @@
     let step = 0;
     const play = () => {
       if (!audio || muted || document.hidden) return;
-      const now = ctx.currentTime + .02;
-      chords[step % chords.length].forEach((f, i) => tone(f, now + i * .24, 2.4, .014, 'sine'));
+      const now = ctx.currentTime + 0.02;
+      chords[step % chords.length].forEach((f, i) => tone(f, now + i * 0.24, 2.4, 0.014));
       step++;
     };
     play();
     audio.timers.push(setInterval(play, 2600));
   }
-
   function stopAmbience() {
     if (!audio) return;
     audio.timers.forEach(clearInterval);
     audio.timers = [];
   }
-
-  function setMuted(value) {
-    muted = value;
+  function setMuted(v) {
+    muted = v;
     soundToggle.classList.toggle('is-muted', muted);
-    soundToggle.textContent = muted ? '×' : '♪';
+    soundToggle.textContent = '♪';
     soundToggle.setAttribute('aria-label', muted ? 'Activar sonido' : 'Desactivar sonido');
     if (muted) stopAmbience();
     else if (story.classList.contains('is-active')) startAmbience();
   }
 
+  /* ---------- secuencia ---------- */
+  const LINES = [
+    ['Gracias por compartir tu tiempo conmigo.', 2500],
+    ['Me gustan esos momentos simples que hemos compartido.', 2700],
+    ['A veces es una conversación, acompañarnos en la micro o simplemente coincidir.', 3200],
+    ['El viernes fue uno de esos momentos bonitos.', 2450],
+    ['Ojalá podamos seguir sumando momentos así.', 2550],
+    ['Estas flores amarillas son para ti. 🌻', 2400]
+  ];
+
   async function startStory(withSound = true) {
-    sequenceToken++;
+    token++;
+    const mine = token;
     setScreen(story);
     rememberVisit();
-    finalCard.classList.remove('show');
-    story.classList.remove('returned');
-    story.classList.add('growing');
+    story.classList.remove('is-returned', 'has-card');
+    story.classList.remove('is-growing');
+    void story.offsetWidth;
+    story.classList.add('is-growing');
     createPetals();
 
     if (withSound) {
       const a = ensureAudio();
       if (a) {
-        await a.ctx.resume();
+        try { await a.ctx.resume(); } catch { /* ignore */ }
         setMuted(false);
         playChime();
         startAmbience();
@@ -202,60 +179,81 @@
     }
 
     await wait(500);
-    if (!await say('Gracias por compartir tu tiempo conmigo.', 2500)) return;
-    if (!await say('Me gustan esos momentos simples que hemos compartido.', 2600)) return;
-    if (!await say('A veces es una conversación, acompañarnos en la micro o simplemente coincidir.', 3100)) return;
-    if (!await say('El viernes fue uno de esos momentos bonitos.', 2450)) return;
-    if (!await say('Ojalá podamos seguir sumando momentos así.', 2550)) return;
-    if (!await say('Estas flores amarillas son para ti. 🌻', 2400)) return;
-
+    for (const [text, hold] of LINES) {
+      if (!await say(text, hold)) return;
+    }
+    if (mine !== token) return;
+    storyLine.className = 'story-line';
     storyLine.textContent = '';
-    finalCard.classList.add('show');
+    story.classList.add('has-card');
   }
 
   function openReturnedGarden() {
-    sequenceToken++;
+    token++;
     rememberVisit();
     setScreen(story);
-    story.classList.remove('growing');
-    story.classList.add('returned');
-    finalCard.classList.add('show');
-    createPetals(9);
+    story.classList.remove('is-growing');
+    story.classList.add('is-returned', 'has-card');
+    storyLine.className = 'story-line';
+    storyLine.textContent = '';
+    createPetals(8);
+    if (!muted && audio) startAmbience();
   }
 
-  function showSecret() { secretNote.classList.add('show'); }
-  function hideSecret() { secretNote.classList.remove('show'); }
+  /* ---------- nota secreta ---------- */
+  function showSecret() {
+    secretNote.hidden = false;
+    secretBackdrop.hidden = false;
+    void secretNote.offsetWidth;
+    secretNote.classList.add('show');
+    secretBackdrop.classList.add('show');
+    secretClose.focus();
+  }
+  function hideSecret() {
+    secretNote.classList.remove('show');
+    secretBackdrop.classList.remove('show');
+    setTimeout(() => {
+      if (!secretNote.classList.contains('show')) { secretNote.hidden = true; secretBackdrop.hidden = true; }
+    }, 320);
+  }
 
-  buildSunflowers();
-
+  /* ---------- eventos ---------- */
   openGift.addEventListener('click', () => startStory(true));
   openMuted.addEventListener('click', () => startStory(false));
   returnButton.addEventListener('click', openReturnedGarden);
+
   soundToggle.addEventListener('click', async () => {
     if (muted) {
       const a = ensureAudio();
-      if (a) await a.ctx.resume();
+      if (a) { try { await a.ctx.resume(); } catch { /* ignore */ } }
       setMuted(false);
       playChime();
     } else {
       setMuted(true);
     }
   });
+
   secretFlower.addEventListener('click', showSecret);
   secretFlower.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      showSecret();
-    }
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showSecret(); }
   });
   secretClose.addEventListener('click', hideSecret);
+  secretBackdrop.addEventListener('click', hideSecret);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && secretNote.classList.contains('show')) hideSecret();
+  });
 
-  // ?reset=1 permite volver a probar la primera visita sin abrir DevTools.
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopAmbience();
+    else if (!muted && story.classList.contains('is-active')) startAmbience();
+  });
+
+  // ?reset=1 vuelve a mostrar la primera visita.
   if (params.get('reset') === '1') {
-    try { localStorage.removeItem(storageKey); } catch {}
-    history.replaceState({}, '', location.pathname + (giftId !== 'angie-yellow-flowers-v2' ? `?g=${encodeURIComponent(giftId)}` : ''));
+    try { localStorage.removeItem(storageKey); } catch { /* ignore */ }
+    const keep = params.get('g') ? `?g=${encodeURIComponent(giftId)}` : '';
+    try { history.replaceState({}, '', location.pathname + keep); } catch { /* ignore */ }
   }
 
-  const memory = readMemory();
-  setScreen(memory ? returnScreen : intro);
+  setScreen(readMemory() ? returnScreen : intro);
 })();
