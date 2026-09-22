@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080b08">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Un pequeño regalo de flores amarillas para Angie.">
+<title>Para Angie 🌻</title>
+<link rel="stylesheet" href="styles.css?v=31">
+</head>
+<body>
+<div class="ambient" aria-hidden="true">
+  <span class="glow glow-a"></span><span class="glow glow-b"></span>
+  <span class="star s1"></span><span class="star s2"></span><span class="star s3"></span>
+  <span class="star s4"></span><span class="star s5"></span><span class="star s6"></span>
+</div>
+
+<main class="app" id="app">
+
+  <section class="screen intro is-active" id="intro" aria-labelledby="intro-title">
+    <div class="intro-inner">
+      <div class="intro-flower" aria-hidden="true">🌻</div>
+      <p class="eyebrow">Para Angie</p>
+      <h1 id="intro-title">Tengo algo pequeño para ti.</h1>
+      <p class="intro-copy">Es mejor verlo con un poquito de sonido.</p>
+      <button class="primary-button" id="openGift" type="button"><span>Abrir</span><span aria-hidden="true">✦</span></button>
+      <button class="text-button" id="openMuted" type="button">Abrir sin sonido</button>
+    </div>
+  </section>
+
+  <section class="screen story" id="story" aria-label="Flores amarillas para Angie">
+    <header class="topbar">
+      <span class="tiny-label">Para Angie 🌻</span>
+      <button class="sound-button" id="soundToggle" type="button" aria-label="Desactivar sonido">♪</button>
+    </header>
+
+    <div class="story-copy"><p class="story-line" id="storyLine" aria-live="polite"></p></div>
+
+    <div class="stage" id="stage">
+      <svg class="scene" id="scene" viewBox="0 0 400 560" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="gPetal" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff0a6"/><stop offset=".45" stop-color="#ffd94f"/><stop offset="1" stop-color="#eeac1c"/>
+          </linearGradient>
+          <linearGradient id="gPetalIn" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffe479"/><stop offset=".5" stop-color="#f7c62f"/><stop offset="1" stop-color="#d9910f"/>
+          </linearGradient>
+          <linearGradient id="gStem" gradientUnits="userSpaceOnUse" x1="200" y1="520" x2="200" y2="90">
+            <stop offset="0" stop-color="#2c5330"/><stop offset=".55" stop-color="#4b7a3d"/><stop offset="1" stop-color="#5d8f47"/>
+          </linearGradient>
+          <linearGradient id="gLeaf" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#5f8b45"/><stop offset="1" stop-color="#31552f"/>
+          </linearGradient>
+          <radialGradient id="gDisk" cx=".38" cy=".34" r=".78">
+            <stop offset="0" stop-color="#8a5a1b"/><stop offset=".55" stop-color="#5b3810"/><stop offset="1" stop-color="#3a2208"/>
+          </radialGradient>
+          <radialGradient id="gGround" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#5f8f45" stop-opacity=".38"/><stop offset="1" stop-color="#5f8f45" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="gPaperA" x1="0" y1="0" x2=".4" y2="1">
+            <stop offset="0" stop-color="#fbf1d6"/><stop offset="1" stop-color="#d9c49a"/>
+          </linearGradient>
+          <linearGradient id="gPaperB" x1="0" y1="0" x2=".2" y2="1">
+            <stop offset="0" stop-color="#f4e6c4"/><stop offset="1" stop-color="#c3ab80"/>
+          </linearGradient>
+          <linearGradient id="gPaperC" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff8e6"/><stop offset="1" stop-color="#e4d2ab"/>
+          </linearGradient>
+          <linearGradient id="gRibbon" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f6cf5c"/><stop offset="1" stop-color="#bd8416"/>
+          </linearGradient>
+          <pattern id="seeds" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(14)">
+            <circle cx="1.5" cy="1.5" r="1.15" fill="#2a1705" opacity=".6"/>
+            <circle cx="4" cy="4" r="1.15" fill="#9a6520" opacity=".42"/>
+          </pattern>
+          <path id="pt" d="M0-15C-7.5-27-8.5-43 0-53 8.5-43 7.5-27 0-15Z" fill="url(#gPetal)"/>
+          <path id="pti" d="M0-13C-6-23-6.5-35 0-42.5 6.5-35 6-23 0-13Z" fill="url(#gPetalIn)"/>
+          <g id="sf">
+            <g opacity=".95"><use href="#pt" transform="rotate(0)"/><use href="#pt" transform="rotate(20)"/><use href="#pt" transform="rotate(40)"/><use href="#pt" transform="rotate(60)"/><use href="#pt" transform="rotate(80)"/><use href="#pt" transform="rotate(100)"/><use href="#pt" transform="rotate(120)"/><use href="#pt" transform="rotate(140)"/><use href="#pt" transform="rotate(160)"/><use href="#pt" transform="rotate(180)"/><use href="#pt" transform="rotate(200)"/><use href="#pt" transform="rotate(220)"/><use href="#pt" transform="rotate(240)"/><use href="#pt" transform="rotate(260)"/><use href="#pt" transform="rotate(280)"/><use href="#pt" transform="rotate(300)"/><use href="#pt" transform="rotate(320)"/><use href="#pt" transform="rotate(340)"/></g>
+            <g><use href="#pti" transform="rotate(10)"/><use href="#pti" transform="rotate(30)"/><use href="#pti" transform="rotate(50)"/><use href="#pti" transform="rotate(70)"/><use href="#pti" transform="rotate(90)"/><use href="#pti" transform="rotate(110)"/><use href="#pti" transform="rotate(130)"/><use href="#pti" transform="rotate(150)"/><use href="#pti" transform="rotate(170)"/><use href="#pti" transform="rotate(190)"/><use href="#pti" transform="rotate(210)"/><use href="#pti" transform="rotate(230)"/><use href="#pti" transform="rotate(250)"/><use href="#pti" transform="rotate(270)"/><use href="#pti" transform="rotate(290)"/><use href="#pti" transform="rotate(310)"/><use href="#pti" transform="rotate(330)"/><use href="#pti" transform="rotate(350)"/></g>
+            <circle r="17.5" fill="url(#gDisk)"/>
+            <circle r="17.5" fill="url(#seeds)"/>
+            <circle r="17.5" fill="none" stroke="#e7a623" stroke-width="3" opacity=".75"/>
+            <circle r="17.5" fill="none" stroke="#1d1004" stroke-width=".8" opacity=".35"/>
+          </g>
+        </defs>
+      
+        <ellipse class="ground" cx="200" cy="533" rx="150" ry="26" fill="url(#gGround)"/>
+      
+        <g class="flowers"><g class="breeze" style="--bd:8.4s; --ba:-1.5deg"><g class="fl" style="--d:0s"><path class="stem" d="M200 508Q174.44 412.04 40.23 342.55" pathLength="1" fill="none" stroke="url(#gStem)" stroke-width="6.83" stroke-linecap="round"/><g transform="translate(162.17 435.47)"><g class="leaf" style="--ld:0.52s" transform="rotate(-73.95) scale(0.968)"><g class="leaf-idle" style="--lf:6.12s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(124.67 397.6)"><g class="leaf" style="--ld:0.66s" transform="rotate(-194.86) scale(0.848,-0.848)"><g class="leaf-idle" style="--lf:5.85s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(40.23 342.55) scale(0.74)"><g class="sway" style="--sd:5.2s"><g class="bloom"><g class="breathe" style="--bt:4.6s"><use href="#sf"/></g></g></g></g></g></g><g class="breeze" style="--bd:7.4s; --ba:1.5deg"><g class="fl" style="--d:0.96s"><path class="stem" d="M200 508Q225.56 412.04 359.77 342.55" pathLength="1" fill="none" stroke="url(#gStem)" stroke-width="6.83" stroke-linecap="round"/><g transform="translate(237.83 435.47)"><g class="leaf" style="--ld:0.52s" transform="rotate(-106.05) scale(0.968,-0.968)"><g class="leaf-idle" style="--lf:4.45s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(275.33 397.6)"><g class="leaf" style="--ld:0.66s" transform="rotate(14.86) scale(0.848)"><g class="leaf-idle" style="--lf:4.63s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(359.77 342.55) scale(0.74)"><g class="sway" style="--sd:7.72s"><g class="bloom"><g class="breathe" style="--bt:6.82s"><use href="#sf"/></g></g></g></g></g></g><g class="breeze" style="--bd:9.6s; --ba:-1.2deg"><g class="fl" style="--d:0.16s"><path class="stem" d="M200 508Q177.5 360.89 59.41 254.36" pathLength="1" fill="none" stroke="url(#gStem)" stroke-width="7.05" stroke-linecap="round"/><g transform="translate(166.71 396.8)"><g class="leaf" style="--ld:0.52s" transform="rotate(-59.89) scale(0.988)"><g class="leaf-idle" style="--lf:4.25s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(133.71 338.75)"><g class="leaf" style="--ld:0.66s" transform="rotate(-179.24) scale(0.868,-0.868)"><g class="leaf-idle" style="--lf:5.21s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(59.41 254.36) scale(0.84)"><g class="sway" style="--sd:5.62s"><g class="bloom"><g class="breathe" style="--bt:4.97s"><use href="#sf"/></g></g></g></g></g></g><g class="breeze" style="--bd:9.1s; --ba:1.2deg"><g class="fl" style="--d:0.8s"><path class="stem" d="M200 508Q222.5 360.89 340.59 254.36" pathLength="1" fill="none" stroke="url(#gStem)" stroke-width="7.05" stroke-linecap="round"/><g transform="translate(233.29 396.8)"><g class="leaf" style="--ld:0.52s" transform="rotate(-120.11) scale(0.988,-0.988)"><g class="leaf-idle" style="--lf:4.43s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(266.29 338.75)"><g class="leaf" style="--ld:0.66s" transform="rotate(-0.76) scale(0.868)"><g class="leaf-idle" style="--lf:6.1s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(340.59 254.36) scale(0.84)"><g class="sway" style="--sd:7.3s"><g class="bloom"><g class="breathe" style="--bt:6.45s"><use href="#sf"/></g></g></g></g></g></g><g class="breeze" style="--bd:7.8s; --ba:-0.9deg"><g class="fl" style="--d:0.32s"><path class="stem" d="M200 508Q186.18 314.27 113.62 173.99" pathLength="1" fill="none" stroke="url(#gStem)" stroke-width="7.27" stroke-linecap="round"/><g transform="translate(179.54 361.57)"><g class="leaf" style="--ld:0.52s" transform="rotate(-47.22) scale(1.008)"><g class="leaf-idle" style="--lf:5.81s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(159.27 285.12)"><g class="leaf" style="--ld:0.66s" transform="rotate(-162.62) scale(0.8879999999999999,-0.8879999999999999)"><g class="leaf-idle" style="--lf:4.37s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(113.62 173.99) scale(0.94)"><g class="sway" style="--sd:6.04s"><g class="bloom"><g class="breathe" style="--bt:5.34s"><use href="#sf"/></g></g></g></g></g></g><g class="breeze" style="--bd:8.9s; --ba:0.9deg"><g class="fl" style="--d:0.64s"><path class="stem" d="M200 508Q213.82 314.27 286.38 173.99" pathLength="1" fill="none" stroke="url(#gStem)" stroke-width="7.27" stroke-linecap="round"/><g transform="translate(220.46 361.57)"><g class="leaf" style="--ld:0.52s" transform="rotate(-132.78) scale(1.008,-1.008)"><g class="leaf-idle" style="--lf:5.03s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(240.73 285.12)"><g class="leaf" style="--ld:0.66s" transform="rotate(-17.38) scale(0.8879999999999999)"><g class="leaf-idle" style="--lf:5.43s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(286.38 173.99) scale(0.94)"><g class="sway" style="--sd:6.88s"><g class="bloom"><g class="breathe" style="--bt:6.08s"><use href="#sf"/></g></g></g></g></g></g><g class="breeze" style="--bd:10.4s; --ba:0.7deg"><g class="fl" style="--d:0.48s"><path class="stem" d="M200 508Q200 278.32 200 112" pathLength="1" fill="none" stroke="url(#gStem)" stroke-width="7.53" stroke-linecap="round"/><g transform="translate(200 334.39)"><g class="leaf" style="--ld:0.52s" transform="rotate(-35) scale(1.032)"><g class="leaf-idle" style="--lf:4.92s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(200 243.75)"><g class="leaf" style="--ld:0.66s" transform="rotate(-145) scale(0.9119999999999999,-0.9119999999999999)"><g class="leaf-idle" style="--lf:4.65s"><path d="M0 0C13-11 32-10 42 2 31 13 12 13 0 0Z" fill="url(#gLeaf)"/><path d="M3 1C14 2 27 3 37 2" fill="none" stroke="#2f5230" stroke-width="1.1" stroke-linecap="round" opacity=".5"/></g></g></g><g transform="translate(200 112) scale(1.06)"><g class="sway" style="--sd:6.46s"><g class="bloom" id="heroHead"><g class="breathe" style="--bt:5.71s"><use href="#sf"/></g></g></g></g></g></g></g>
+        <circle class="hero-hit" id="secretFlower" cx="200" cy="110" r="62" fill="transparent" role="button" tabindex="0" aria-label="Tocar la flor central"><title>Tocar la flor central</title></circle>
+      
+        <g class="wrap">
+          <path class="w-back" d="M112 430Q200 406 288 430 200 464 112 430Z" fill="#a98f65"/>
+          <path class="w-body" d="M200 549 112 430Q200 468 288 430Z" fill="url(#gPaperA)"/>
+          <path class="w-left" d="M200 549 133 442Q200 470 200 470Z" fill="url(#gPaperB)" opacity=".8"/>
+          <path class="w-front" d="M200 549 154 444Q200 468 246 444Z" fill="url(#gPaperC)"/>
+          <path d="M200 546 200 474M171 460 186 530M229 460 214 530" stroke="#c9b285" stroke-width="1.1" opacity=".45" fill="none"/>
+          <g class="ribbon">
+            <path d="M166 500Q200 512 234 500L230 521Q200 532 170 521Z" fill="url(#gRibbon)"/>
+            <path d="M168 506C150 494 136 498 138 510 140 521 158 520 168 513Z" fill="url(#gRibbon)"/>
+            <path d="M232 506C250 494 264 498 262 510 260 521 242 520 232 513Z" fill="url(#gRibbon)"/>
+            <circle cx="200" cy="509" r="7" fill="#e9bc41"/>
+          </g>
+        </g>
+      </svg>
+      <div class="falling-petals" id="petals" aria-hidden="true"></div>
+    </div>
+
+    <div class="card-slot">
+      <div class="final-card" id="finalCard">
+        <p class="final-kicker">Flores amarillas para ti</p>
+        <h2>Gracias, Angie. 💛</h2>
+        <p>Gracias por compartir tu tiempo conmigo.</p>
+        <p>Ojalá podamos seguir coincidiendo y sumando buenos momentos, de esos que simplemente se dan y terminan siendo bonitos.</p>
+        <p class="signature">- Alexis</p>
+      </div>
+    </div>
+
+    <div class="secret-backdrop" id="secretBackdrop" hidden></div>
+    <div class="secret-note" id="secretNote" role="dialog" aria-modal="true" aria-label="Nota secreta" hidden>
+      <button class="secret-close" id="secretClose" type="button" aria-label="Cerrar">×</button>
+      <span aria-hidden="true">🌻</span>
+      <p><strong>P. D.</strong> Gracias por hacer bonitos también los momentos más simples. 💛</p>
+    </div>
+  </section>
+
+  <section class="screen return-screen" id="returnScreen" aria-labelledby="return-title">
+    <div class="intro-inner">
+      <div class="return-flowers" aria-hidden="true">
+        <span class="mini-sunflower"></span><span class="mini-sunflower big"></span><span class="mini-sunflower"></span>
+      </div>
+      <p class="eyebrow">Para Angie</p>
+      <h1 id="return-title">¿Volviste? 🌻</h1>
+      <p class="return-hi">Qué bonito tenerte otra vez por aquí.</p>
+      <p class="return-sub">Las flores siguen donde las dejaste.</p>
+      <button class="primary-button" id="returnButton" type="button">Volver al jardín <span aria-hidden="true">✦</span></button>
+    </div>
+  </section>
+
+</main>
+<script src="app.js?v=31"></script>
+</body>
+</html>
