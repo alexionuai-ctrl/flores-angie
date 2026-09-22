@@ -189,7 +189,7 @@ h1 { font-size: clamp(1.9rem, 8vw, 3.4rem); line-height: 1.02; letter-spacing: -
 .leaf-idle { transform-box: fill-box; transform-origin: 0% 45%; }
 .bloom { transform: scale(0); transform-box: fill-box; transform-origin: center; }
 .sway, .breathe { transform-box: fill-box; transform-origin: center; }
-.breeze { transform-box: view-box; transform-origin: 200px 508px; }
+.breeze { transform-box: view-box; transform-origin: 200px 508px; --bam: 1; }
 .wrap { opacity: 0; transform: translateY(26px); transform-origin: 200px 540px; }
 
 .story.is-growing .ground,
@@ -226,8 +226,22 @@ h1 { font-size: clamp(1.9rem, 8vw, 3.4rem); line-height: 1.02; letter-spacing: -
   50% { transform: rotate(2.4deg) translateY(-3px); }
 }
 @keyframes breeze {
-  0%, 100% { transform: rotate(calc(var(--ba) * -1)); }
-  50% { transform: rotate(var(--ba)); }
+  0%, 100% { transform: rotate(calc(var(--ba) * var(--bam) * -1)); }
+  50% { transform: rotate(calc(var(--ba) * var(--bam))); }
+}
+
+/* variantes suaves: mismo movimiento, amplitud reducida y mas lento */
+@keyframes swaySoft {
+  0%, 100% { transform: rotate(-1.4deg); }
+  50% { transform: rotate(1.5deg); }
+}
+@keyframes breatheSoft {
+  0%, 100% { transform: scale(.993); }
+  50% { transform: scale(1.011); }
+}
+@keyframes leafIdleSoft {
+  0%, 100% { transform: rotate(-2.4deg); }
+  50% { transform: rotate(3deg); }
 }
 @keyframes breathe {
   0%, 100% { transform: scale(.985); }
@@ -368,26 +382,39 @@ h1 { font-size: clamp(1.9rem, 8vw, 3.4rem); line-height: 1.02; letter-spacing: -
 }
 
 /* Movimiento reducido.
-   No apagamos todo: el ramo creciendo ES el regalo, y es un movimiento único,
-   contenido y predecible. Lo que sí se apaga es lo que de verdad molesta a quien
-   activa esta preferencia: los bucles infinitos y los pétalos cayendo.
-   Con ?motion=full se fuerza la experiencia completa. */
+   No apagamos el movimiento: una escena completamente inmovil se ve rota, y hay
+   navegadores y configuraciones que declaran esta preferencia sin que la persona
+   la haya pedido. Lo que hacemos es SUAVIZAR: misma
+   animacion, amplitud reducida a un tercio y ritmo mas lento. Solo se apaga el
+   parpadeo de las estrellas y los petalos cayendo, que es lo que de verdad molesta.
+   Con ?motion=full se fuerza la experiencia completa; con ?motion=off se deja quieta. */
 @media (prefers-reduced-motion: reduce) {
-  :root:not([data-motion="full"]) .glow,
-  :root:not([data-motion="full"]) .star,
-  :root:not([data-motion="full"]) .intro-flower,
-  :root:not([data-motion="full"]) .mini-sunflower,
-  :root:not([data-motion="full"]) .breeze,
-  :root:not([data-motion="full"]) .sway,
-  :root:not([data-motion="full"]) .breathe,
-  :root:not([data-motion="full"]) .leaf-idle {
-    animation: none !important;
+  :root:not([data-motion="full"]) .breeze {
+    --bam: .6;
+    animation-duration: calc(var(--bd) * 1.35) !important;
   }
+  :root:not([data-motion="full"]) .sway {
+    animation-name: swaySoft !important;
+    animation-duration: calc(var(--sd) * 1.35) !important;
+  }
+  :root:not([data-motion="full"]) .breathe {
+    animation-name: breatheSoft !important;
+    animation-duration: calc(var(--bt) * 1.35) !important;
+  }
+  :root:not([data-motion="full"]) .leaf-idle {
+    animation-name: leafIdleSoft !important;
+    animation-duration: calc(var(--lf) * 1.35) !important;
+  }
+  :root:not([data-motion="full"]) .intro-flower,
+  :root:not([data-motion="full"]) .mini-sunflower {
+    animation-duration: 7s !important;
+  }
+  :root:not([data-motion="full"]) .star { animation: none !important; }
   :root:not([data-motion="full"]) .falling-petals { display: none; }
   :root:not([data-motion="full"]) .screen { transform: none; }
 }
 
-/* ?motion=off deja la escena quieta a proposito */
+/* ?motion=off deja la escena completamente quieta a proposito */
 :root[data-motion="off"] .glow,
 :root[data-motion="off"] .star,
 :root[data-motion="off"] .intro-flower,

@@ -1,4 +1,4 @@
-# Flores amarillas para Angie — V3.1
+# Flores amarillas para Angie — V3.2
 
 Mini experiencia web pensada para móvil, que también funciona bien en PC.
 Se publica tal cual en GitHub Pages (solo archivos estáticos, sin dependencias externas).
@@ -49,6 +49,27 @@ teléfono, los girasoles quedaran fuera de pantalla, recortados o tapados.
 - **Fondo vivo.** Los halos de luz derivan lentamente (26 s y 34 s).
 - **Orígenes de transformación explícitos** (`transform-box`) para que el movimiento
   se vea igual en Safari/iOS que en Chrome.
+
+## Qué se arregló en V3.2
+
+- **Movimiento reducido: la regla era demasiado agresiva.** Si el sistema operativo
+  tiene activado "reducir movimiento" (Windows: Configuración → Accesibilidad →
+  Efectos visuales → Efectos de animación; iPhone: Ajustes → Accesibilidad →
+  Movimiento → Reducir movimiento), el CSS apagaba **todas** las animaciones. El ramo
+  aparecía de golpe, sin crecer y sin vaivén: nada que ver con la experiencia real.
+  Ahora se conserva el crecimiento del ramo (es el contenido del regalo, es un
+  movimiento único, contenido y predecible) y solo se apagan los bucles infinitos
+  (brisa, cabeceo, respiración, hojas) y los pétalos cayendo, que es lo que de verdad
+  molesta a quien activa esa preferencia.
+- **El ritmo del relato ya no depende de esa preferencia.** El tiempo de lectura de
+  cada frase es el mismo para todo el mundo; antes se acortaba a menos de la mitad.
+- **Control manual del movimiento** por URL:
+  - `?motion=full` fuerza la experiencia completa aunque el sistema pida menos movimiento.
+  - `?motion=off` deja la escena quieta a propósito.
+- **Anti-caché `?v=32`** en los enlaces a `styles.css` y `app.js`. GitHub Pages y los
+  navegadores cachean esos archivos con mucha agresividad; sin esto se puede seguir
+  viendo la versión anterior aunque el repositorio ya esté actualizado. Si vuelves a
+  cambiar el CSS o el JS, sube ese número.
 
 ## Publicar / actualizar en GitHub Pages
 

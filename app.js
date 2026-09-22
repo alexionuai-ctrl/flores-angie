@@ -95,7 +95,9 @@
     try {
       const ctx = new Ctx();
       const master = ctx.createGain();
-      master.gain.value = 0.17;
+      // Sube desde cero para que no suene un "clic" al arrancar.
+      master.gain.setValueAtTime(0.0001, ctx.currentTime);
+      master.gain.exponentialRampToValueAtTime(0.55, ctx.currentTime + 0.6);
       master.connect(ctx.destination);
       audio = { ctx, master, timers: [] };
       return audio;
@@ -117,8 +119,8 @@
   function playChime() {
     if (!audio || muted) return;
     const t = audio.ctx.currentTime + 0.02;
-    [659.25, 783.99, 987.77].forEach((f, i) => tone(f, t + i * 0.1, 0.9, 0.055));
-    tone(1318.51, t + 0.33, 1.15, 0.03);
+    [659.25, 783.99, 987.77].forEach((f, i) => tone(f, t + i * 0.1, 0.9, 0.2));
+    tone(1318.51, t + 0.33, 1.15, 0.09);
   }
   function startAmbience() {
     if (!audio || muted) return;
@@ -134,7 +136,7 @@
     const play = () => {
       if (!audio || muted || document.hidden) return;
       const now = ctx.currentTime + 0.02;
-      chords[step % chords.length].forEach((f, i) => tone(f, now + i * 0.24, 2.4, 0.014));
+      chords[step % chords.length].forEach((f, i) => tone(f, now + i * 0.24, 2.4, 0.1));
       step++;
     };
     play();
