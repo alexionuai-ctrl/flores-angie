@@ -59,7 +59,7 @@
     if (mine !== token) return false;
     storyLine.classList.remove('show');
     storyLine.classList.add('hide');
-    await wait(reduceMotion ? 60 : 520);
+    await wait(reduceMotion ? 60 : 780);
     return mine === token;
   }
 
@@ -160,11 +160,14 @@
     const mine = token;
     setScreen(story);
     rememberVisit();
-    story.classList.remove('is-returned', 'has-card');
-    story.classList.remove('is-growing');
+    story.classList.remove('is-returned', 'has-card', 'is-growing');
     void story.offsetWidth;
-    story.classList.add('is-growing');
     createPetals();
+
+    // deja que el cruce de pantallas termine antes de que empiece a crecer el ramo
+    await wait(reduceMotion ? 0 : 380);
+    if (mine !== token) return;
+    story.classList.add('is-growing');
 
     if (withSound) {
       const a = ensureAudio();
@@ -178,7 +181,7 @@
       setMuted(true);
     }
 
-    await wait(500);
+    await wait(reduceMotion ? 120 : 620);
     for (const [text, hold] of LINES) {
       if (!await say(text, hold)) return;
     }
@@ -188,16 +191,19 @@
     story.classList.add('has-card');
   }
 
-  function openReturnedGarden() {
+  async function openReturnedGarden() {
     token++;
+    const mine = token;
     rememberVisit();
     setScreen(story);
-    story.classList.remove('is-growing');
-    story.classList.add('is-returned', 'has-card');
+    story.classList.remove('is-growing', 'has-card');
+    story.classList.add('is-returned');
     storyLine.className = 'story-line';
     storyLine.textContent = '';
     createPetals(8);
     if (!muted && audio) startAmbience();
+    await wait(reduceMotion ? 0 : 900);
+    if (mine === token) story.classList.add('has-card');
   }
 
   /* ---------- nota secreta ---------- */

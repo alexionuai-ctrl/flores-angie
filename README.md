@@ -1,4 +1,4 @@
-# Flores amarillas para Angie — V3
+# Flores amarillas para Angie — V3.1
 
 Mini experiencia web pensada para móvil, que también funciona bien en PC.
 Se publica tal cual en GitHub Pages (solo archivos estáticos, sin dependencias externas).
@@ -29,6 +29,26 @@ teléfono, los girasoles quedaran fuera de pantalla, recortados o tapados.
 - Botones con área táctil mínima de 44px, foco visible y soporte de teclado.
 - Nota secreta como diálogo real, con fondo oscurecido y cierre con `Esc`.
 - Respeta `prefers-reduced-motion`: muestra el ramo completo sin animaciones.
+
+## Qué se agregó en V3.1
+
+- **Bug del tallo central.** El degradado de los tallos usaba `objectBoundingBox`.
+  La flor del medio tiene un tallo perfectamente recto, así que su caja delimitadora
+  medía 0px de ancho y, según la especificación SVG, el navegador directamente no
+  dibujaba el trazo. Ahora el degradado usa `userSpaceOnUse` y se ven los 7 tallos.
+- **Sin cortes entre escenas.** Las pantallas ya no se ocultan con `display:none`;
+  hacen fundido cruzado con opacidad y un leve desplazamiento (0,75 s). El ramo
+  empieza a crecer recién cuando el cruce terminó.
+- **El ramo ya no está quieto.** Tres capas de movimiento continuo, cada una con su
+  propia duración para que nunca se sincronicen:
+  - `breeze`: cada flor completa se mece desde el nudo del ramo (7,4 s – 10,4 s).
+  - `sway`: la cabezuela cabecea sobre su tallo (5,2 s – 7,7 s).
+  - `breathe`: los pétalos se abren y cierran apenas (4,6 s – 7,1 s).
+  - `leafIdle`: las hojas se agitan con desfases aleatorios.
+- **Texto con desenfoque.** Cada frase entra y sale con `blur`, sin salto seco.
+- **Fondo vivo.** Los halos de luz derivan lentamente (26 s y 34 s).
+- **Orígenes de transformación explícitos** (`transform-box`) para que el movimiento
+  se vea igual en Safari/iOS que en Chrome.
 
 ## Publicar / actualizar en GitHub Pages
 
