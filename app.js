@@ -20,7 +20,16 @@
   const secretClose = $('secretClose');
   const petals = $('petals');
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // ?motion=full fuerza la experiencia completa aunque el sistema pida menos movimiento.
+  // ?motion=off la deja quieta a proposito.
+  const motionParam = params.get('motion');
+  if (motionParam === 'full' || motionParam === 'off') {
+    document.documentElement.dataset.motion = motionParam;
+  }
+  const systemReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Solo se usa para los petalos que caen: el ritmo de lectura del texto y el
+  // crecimiento del ramo se mantienen iguales para todo el mundo.
+  const reduceMotion = motionParam === 'off' || (systemReduce && motionParam !== 'full');
 
   let audio = null;
   let muted = false;
@@ -55,11 +64,11 @@
     storyLine.textContent = text;
     void storyLine.offsetWidth;
     storyLine.classList.add('show');
-    await wait(reduceMotion ? Math.min(hold, 1400) : hold);
+    await wait(hold);
     if (mine !== token) return false;
     storyLine.classList.remove('show');
     storyLine.classList.add('hide');
-    await wait(reduceMotion ? 60 : 780);
+    await wait(780);
     return mine === token;
   }
 
@@ -165,7 +174,7 @@
     createPetals();
 
     // deja que el cruce de pantallas termine antes de que empiece a crecer el ramo
-    await wait(reduceMotion ? 0 : 380);
+    await wait(380);
     if (mine !== token) return;
     story.classList.add('is-growing');
 
@@ -181,7 +190,7 @@
       setMuted(true);
     }
 
-    await wait(reduceMotion ? 120 : 620);
+    await wait(620);
     for (const [text, hold] of LINES) {
       if (!await say(text, hold)) return;
     }
@@ -202,7 +211,7 @@
     storyLine.textContent = '';
     createPetals(8);
     if (!muted && audio) startAmbience();
-    await wait(reduceMotion ? 0 : 900);
+    await wait(900);
     if (mine === token) story.classList.add('has-card');
   }
 

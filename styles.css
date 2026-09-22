@@ -367,16 +367,33 @@ h1 { font-size: clamp(1.9rem, 8vw, 3.4rem); line-height: 1.02; letter-spacing: -
   .mini-sunflower::before { height: 38px; }
 }
 
+/* Movimiento reducido.
+   No apagamos todo: el ramo creciendo ES el regalo, y es un movimiento único,
+   contenido y predecible. Lo que sí se apaga es lo que de verdad molesta a quien
+   activa esta preferencia: los bucles infinitos y los pétalos cayendo.
+   Con ?motion=full se fuerza la experiencia completa. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .001ms !important;
+  :root:not([data-motion="full"]) .glow,
+  :root:not([data-motion="full"]) .star,
+  :root:not([data-motion="full"]) .intro-flower,
+  :root:not([data-motion="full"]) .mini-sunflower,
+  :root:not([data-motion="full"]) .breeze,
+  :root:not([data-motion="full"]) .sway,
+  :root:not([data-motion="full"]) .breathe,
+  :root:not([data-motion="full"]) .leaf-idle {
+    animation: none !important;
   }
-  .story .stem { stroke-dashoffset: 0; }
-  .story .leaf, .story .bloom { transform: scale(1); }
-  .story .wrap, .story .ground { opacity: 1; transform: none; }
-  .falling-petals { display: none; }
-  .screen { transform: none; }
-  .story-line { filter: none; }
+  :root:not([data-motion="full"]) .falling-petals { display: none; }
+  :root:not([data-motion="full"]) .screen { transform: none; }
 }
+
+/* ?motion=off deja la escena quieta a proposito */
+:root[data-motion="off"] .glow,
+:root[data-motion="off"] .star,
+:root[data-motion="off"] .intro-flower,
+:root[data-motion="off"] .mini-sunflower,
+:root[data-motion="off"] .breeze,
+:root[data-motion="off"] .sway,
+:root[data-motion="off"] .breathe,
+:root[data-motion="off"] .leaf-idle { animation: none !important; }
+:root[data-motion="off"] .falling-petals { display: none; }
